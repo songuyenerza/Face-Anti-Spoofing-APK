@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FaceLivenessDetection</string>
+
+    <string name="real_face">Real face</string>
+    <string name="fake_face">Fake face</string>
+    <string name="loading">loading</string>
+    <string name="set_threshold_dialog_title">Threshold setting</string>
+    <string name="set_threshold_dialog_text_hint">Threshold range 0–1, recommended threshold 0.915</string>
+    <string name="set_threshold_dialog_confirm">Sure</string>
+    <string name="set_threshold_dialog_hint">Please enter a threshold</string>
+</resources>

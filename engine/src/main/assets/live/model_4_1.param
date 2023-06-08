@@ -1,0 +1,184 @@
+7767517
+182 200
+Input            data                     0 1 data
+MemoryData       322                      0 1 322 0=1 1=1 2=3
+MemoryData       324                      0 1 324 0=1 1=1 2=3
+BinaryOp         Div_2                    1 1 data 320 0=3 1=1 2=2.550000e+02
+BinaryOp         Sub_5                    2 1 320 322 323 0=1
+BinaryOp         Div_7                    2 1 323 324 325 0=3
+Reshape          Reshape_9                1 1 325 327 0=128 1=128 2=3
+Convolution      Conv_10                  1 1 327 832 0=16 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=432
+HardSwish        Mul_15                   1 1 832 336 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_0              1 2 336 336_splitncnn_0 336_splitncnn_1
+ConvolutionDepthWise Conv_16                  1 1 336_splitncnn_1 835 0=16 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=144 7=16
+ReLU             Relu_17                  1 1 835 339
+Convolution      Conv_18                  1 1 339 838 0=16 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=256
+BinaryOp         Add_19                   2 1 336_splitncnn_0 838 342 0=0
+Convolution      Conv_20                  1 1 342 841 0=64 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1024
+ReLU             Relu_21                  1 1 841 345
+ConvolutionDepthWise Conv_22                  1 1 345 844 0=64 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=576 7=64
+ReLU             Relu_23                  1 1 844 348
+Convolution      Conv_24                  1 1 348 847 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1536
+Split            splitncnn_1              1 2 847 847_splitncnn_0 847_splitncnn_1
+Convolution      Conv_25                  1 1 847_splitncnn_1 850 0=72 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1728
+ReLU             Relu_26                  1 1 850 353
+ConvolutionDepthWise Conv_27                  1 1 353 853 0=72 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=648 7=72
+ReLU             Relu_28                  1 1 853 356
+Convolution      Conv_29                  1 1 356 856 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1728
+BinaryOp         Add_30                   2 1 847_splitncnn_0 856 359 0=0
+Convolution      Conv_31                  1 1 359 859 0=72 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1728
+ReLU             Relu_32                  1 1 859 362
+ConvolutionDepthWise Conv_33                  1 1 362 862 0=72 1=5 11=5 2=1 12=1 3=2 13=2 4=2 14=2 15=2 16=2 5=1 6=1800 7=72
+Split            splitncnn_2              1 2 862 862_splitncnn_0 862_splitncnn_1
+Pooling          GlobalAveragePool_40     1 1 862_splitncnn_1 371 0=1 4=1
+Reshape          Reshape_44               1 1 371 375 0=72
+InnerProduct     Gemm_45                  1 1 375 376 0=24 1=1 2=1728
+ReLU             Relu_46                  1 1 376 377
+InnerProduct     Gemm_47                  1 1 377 378 0=72 1=1 2=1728
+HardSigmoid      Div_51                   1 1 378 384 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_55               1 1 384 392 0=1 1=1 2=72
+BinaryOp         Mul_56                   2 1 862_splitncnn_0 392 393 0=2
+ReLU             Relu_57                  1 1 393 394
+Convolution      Conv_58                  1 1 394 865 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2880
+Split            splitncnn_3              1 2 865 865_splitncnn_0 865_splitncnn_1
+Convolution      Conv_59                  1 1 865_splitncnn_1 868 0=120 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4800
+ReLU             Relu_60                  1 1 868 399
+ConvolutionDepthWise Conv_61                  1 1 399 871 0=120 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=3000 7=120
+Split            splitncnn_4              1 2 871 871_splitncnn_0 871_splitncnn_1
+Pooling          GlobalAveragePool_68     1 1 871_splitncnn_1 408 0=1 4=1
+Reshape          Reshape_72               1 1 408 412 0=120
+InnerProduct     Gemm_73                  1 1 412 413 0=32 1=1 2=3840
+ReLU             Relu_74                  1 1 413 414
+InnerProduct     Gemm_75                  1 1 414 415 0=120 1=1 2=3840
+HardSigmoid      Div_79                   1 1 415 421 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_83               1 1 421 429 0=1 1=1 2=120
+BinaryOp         Mul_84                   2 1 871_splitncnn_0 429 430 0=2
+ReLU             Relu_85                  1 1 430 431
+Convolution      Conv_86                  1 1 431 874 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4800
+BinaryOp         Add_87                   2 1 865_splitncnn_0 874 434 0=0
+Split            splitncnn_5              1 2 434 434_splitncnn_0 434_splitncnn_1
+Convolution      Conv_88                  1 1 434_splitncnn_1 877 0=120 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4800
+ReLU             Relu_89                  1 1 877 437
+ConvolutionDepthWise Conv_90                  1 1 437 880 0=120 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=3000 7=120
+Split            splitncnn_6              1 2 880 880_splitncnn_0 880_splitncnn_1
+Pooling          GlobalAveragePool_97     1 1 880_splitncnn_1 446 0=1 4=1
+Reshape          Reshape_101              1 1 446 450 0=120
+InnerProduct     Gemm_102                 1 1 450 451 0=32 1=1 2=3840
+ReLU             Relu_103                 1 1 451 452
+InnerProduct     Gemm_104                 1 1 452 453 0=120 1=1 2=3840
+HardSigmoid      Div_108                  1 1 453 459 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_112              1 1 459 467 0=1 1=1 2=120
+BinaryOp         Mul_113                  2 1 880_splitncnn_0 467 468 0=2
+ReLU             Relu_114                 1 1 468 469
+Convolution      Conv_115                 1 1 469 883 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4800
+BinaryOp         Add_116                  2 1 434_splitncnn_0 883 472 0=0
+Convolution      Conv_117                 1 1 472 886 0=240 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9600
+HardSwish        Mul_122                  1 1 886 481 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_123                 1 1 481 889 0=240 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=2160 7=240
+HardSwish        Mul_128                  1 1 889 490 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_129                 1 1 490 892 0=80 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=19200
+Split            splitncnn_7              1 2 892 892_splitncnn_0 892_splitncnn_1
+Convolution      Conv_130                 1 1 892_splitncnn_1 895 0=200 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=16000
+HardSwish        Mul_135                  1 1 895 501 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_136                 1 1 501 898 0=200 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=1800 7=200
+HardSwish        Mul_141                  1 1 898 510 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_142                 1 1 510 901 0=80 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=16000
+BinaryOp         Add_143                  2 1 892_splitncnn_0 901 513 0=0
+Split            splitncnn_8              1 2 513 513_splitncnn_0 513_splitncnn_1
+Convolution      Conv_144                 1 1 513_splitncnn_1 904 0=184 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=14720
+HardSwish        Mul_149                  1 1 904 522 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_150                 1 1 522 907 0=184 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=1656 7=184
+HardSwish        Mul_155                  1 1 907 531 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_156                 1 1 531 910 0=80 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=14720
+BinaryOp         Add_157                  2 1 513_splitncnn_0 910 534 0=0
+Split            splitncnn_9              1 2 534 534_splitncnn_0 534_splitncnn_1
+Convolution      Conv_158                 1 1 534_splitncnn_1 913 0=184 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=14720
+HardSwish        Mul_163                  1 1 913 543 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_164                 1 1 543 916 0=184 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=1656 7=184
+HardSwish        Mul_169                  1 1 916 552 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_170                 1 1 552 919 0=80 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=14720
+BinaryOp         Add_171                  2 1 534_splitncnn_0 919 555 0=0
+Convolution      Conv_172                 1 1 555 922 0=480 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=38400
+HardSwish        Mul_177                  1 1 922 564 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_178                 1 1 564 925 0=480 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=4320 7=480
+Split            splitncnn_10             1 2 925 925_splitncnn_0 925_splitncnn_1
+Pooling          GlobalAveragePool_185    1 1 925_splitncnn_1 573 0=1 4=1
+Reshape          Reshape_189              1 1 573 577 0=480
+InnerProduct     Gemm_190                 1 1 577 578 0=120 1=1 2=57600
+ReLU             Relu_191                 1 1 578 579
+InnerProduct     Gemm_192                 1 1 579 580 0=480 1=1 2=57600
+HardSigmoid      Div_196                  1 1 580 586 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_200              1 1 586 594 0=1 1=1 2=480
+BinaryOp         Mul_201                  2 1 925_splitncnn_0 594 595 0=2
+HardSwish        Mul_206                  1 1 595 602 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_207                 1 1 602 928 0=112 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=53760
+Split            splitncnn_11             1 2 928 928_splitncnn_0 928_splitncnn_1
+Convolution      Conv_208                 1 1 928_splitncnn_1 931 0=672 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=75264
+HardSwish        Mul_213                  1 1 931 613 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_214                 1 1 613 934 0=672 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=6048 7=672
+Split            splitncnn_12             1 2 934 934_splitncnn_0 934_splitncnn_1
+Pooling          GlobalAveragePool_221    1 1 934_splitncnn_1 622 0=1 4=1
+Reshape          Reshape_225              1 1 622 626 0=672
+InnerProduct     Gemm_226                 1 1 626 627 0=168 1=1 2=112896
+ReLU             Relu_227                 1 1 627 628
+InnerProduct     Gemm_228                 1 1 628 629 0=672 1=1 2=112896
+HardSigmoid      Div_232                  1 1 629 635 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_236              1 1 635 643 0=1 1=1 2=672
+BinaryOp         Mul_237                  2 1 934_splitncnn_0 643 644 0=2
+HardSwish        Mul_242                  1 1 644 651 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_243                 1 1 651 937 0=112 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=75264
+BinaryOp         Add_244                  2 1 928_splitncnn_0 937 654 0=0
+Convolution      Conv_245                 1 1 654 940 0=672 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=75264
+HardSwish        Mul_250                  1 1 940 663 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_251                 1 1 663 943 0=672 1=5 11=5 2=1 12=1 3=2 13=2 4=2 14=2 15=2 16=2 5=1 6=16800 7=672
+Split            splitncnn_13             1 2 943 943_splitncnn_0 943_splitncnn_1
+Pooling          GlobalAveragePool_258    1 1 943_splitncnn_1 672 0=1 4=1
+Reshape          Reshape_262              1 1 672 676 0=672
+InnerProduct     Gemm_263                 1 1 676 677 0=168 1=1 2=112896
+ReLU             Relu_264                 1 1 677 678
+InnerProduct     Gemm_265                 1 1 678 679 0=672 1=1 2=112896
+HardSigmoid      Div_269                  1 1 679 685 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_273              1 1 685 693 0=1 1=1 2=672
+BinaryOp         Mul_274                  2 1 943_splitncnn_0 693 694 0=2
+HardSwish        Mul_279                  1 1 694 701 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_280                 1 1 701 946 0=160 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=107520
+Split            splitncnn_14             1 2 946 946_splitncnn_0 946_splitncnn_1
+Convolution      Conv_281                 1 1 946_splitncnn_1 949 0=960 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=153600
+HardSwish        Mul_286                  1 1 949 712 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_287                 1 1 712 952 0=960 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=24000 7=960
+Split            splitncnn_15             1 2 952 952_splitncnn_0 952_splitncnn_1
+Pooling          GlobalAveragePool_294    1 1 952_splitncnn_1 721 0=1 4=1
+Reshape          Reshape_298              1 1 721 725 0=960
+InnerProduct     Gemm_299                 1 1 725 726 0=240 1=1 2=230400
+ReLU             Relu_300                 1 1 726 727
+InnerProduct     Gemm_301                 1 1 727 728 0=960 1=1 2=230400
+HardSigmoid      Div_305                  1 1 728 734 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_309              1 1 734 742 0=1 1=1 2=960
+BinaryOp         Mul_310                  2 1 952_splitncnn_0 742 743 0=2
+HardSwish        Mul_315                  1 1 743 750 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_316                 1 1 750 955 0=160 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=153600
+BinaryOp         Add_317                  2 1 946_splitncnn_0 955 753 0=0
+Split            splitncnn_16             1 2 753 753_splitncnn_0 753_splitncnn_1
+Convolution      Conv_318                 1 1 753_splitncnn_1 958 0=960 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=153600
+HardSwish        Mul_323                  1 1 958 762 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_324                 1 1 762 961 0=960 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=24000 7=960
+Split            splitncnn_17             1 2 961 961_splitncnn_0 961_splitncnn_1
+Pooling          GlobalAveragePool_331    1 1 961_splitncnn_1 771 0=1 4=1
+Reshape          Reshape_335              1 1 771 775 0=960
+InnerProduct     Gemm_336                 1 1 775 776 0=240 1=1 2=230400
+ReLU             Relu_337                 1 1 776 777
+InnerProduct     Gemm_338                 1 1 777 778 0=960 1=1 2=230400
+HardSigmoid      Div_342                  1 1 778 784 0=1.666667e-01 1=5.000000e-01
+Reshape          Reshape_346              1 1 784 792 0=1 1=1 2=960
+BinaryOp         Mul_347                  2 1 961_splitncnn_0 792 793 0=2
+HardSwish        Mul_352                  1 1 793 800 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_353                 1 1 800 964 0=160 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=153600
+BinaryOp         Add_354                  2 1 753_splitncnn_0 964 803 0=0
+Convolution      Conv_355                 1 1 803 967 0=1280 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=204800
+HardSwish        Mul_360                  1 1 967 812 0=1.666667e-01 1=5.000000e-01
+Pooling          GlobalAveragePool_361    1 1 812 813 0=1 4=1
+Reshape          Reshape_367              1 1 813 821 0=-1
+BatchNorm        BatchNormalization_368   1 1 821 822 0=1280
+HardSwish        Mul_373                  1 1 822 829 0=1.666667e-01 1=5.000000e-01
+InnerProduct     Gemm_374                 1 1 829 830 0=2 1=1 2=2560
+Softmax          Softmax_375              1 1 830 softmax 0=0 1=1

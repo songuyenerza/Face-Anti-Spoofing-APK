@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="result"
+            type="com.example.test.DetectionResult" />
+        <variable
+            name="result2"
+            type="com.example.test.DetectionResult" />
+        <variable
+            name="viewModel"
+            type="com.example.test.CameraViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/testImageView">
+
+        </ImageView>
+        <SurfaceView
+            android:id="@+id/surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:id="@+id/scan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="136dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginBottom="136dp"
+            android:visibility="@{result.hasFace ? View.GONE : View.VISIBLE}"
+            android:background="@drawable/scanning" />
+
+        <com.example.test.CoverView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:horizontalPadding="21dp"
+            app:verticalPadding="136dp"
+            app:backgroundColor="@color/cover_background"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame"
+            android:keepScreenOn="true"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="136dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginBottom="136dp" />
+
+
+        <LinearLayout
+            android:layout_width="165dp"
+            android:layout_height="31dp"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/time_bg"
+            android:visibility="@{result.hasFace ? View.VISIBLE : View.GONE}"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/clock"
+                android:text='@{String.valueOf(result.time) + "ms"}'
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
+
+        <com.example.test.RectView
+            android:id="@+id/rectView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:color="@{result.confidence == 0 ?@color/loading_face_color:result.confidence >= result.threshold ? @color/real_face_color : @color/fake_face_color}"
+            app:confidence="@{result.confidence}"
+            app:lineLength="40dp"
+            app:radius="3dp"
+            app:textPadding="6dp"
+            app:textSize="15sp"
+            app:x1="@{result.left}"
+            app:x2="@{result.right}"
+            app:y1="@{result.top}"
+            app:y2="@{result.bottom}" />
+
+        <com.example.test.RectView
+            android:id="@+id/rectView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:color="@{result2.confidence == 0 ?@color/loading_face_color: result.confidence >= result.threshold ? @color/real_face_color : @color/fake_face_color}"
+            app:confidence="@{result2.confidence}"
+            app:lineLength="40dp"
+            app:radius="3dp"
+            app:textPadding="6dp"
+            app:textSize="15sp"
+            app:x1="@{result2.left}"
+            app:x2="@{result2.right}"
+            app:y1="@{result2.top}"
+            app:y2="@{result2.bottom}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="72dp">
+            <LinearLayout
+                android:layout_width="142dp"
+                android:layout_height="43dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="@{result.hasFace ? View.VISIBLE : View.GONE}"
+                android:background="@{result.confidence == 0 ?@drawable/result_loading_face_shape: result.confidence >= result.threshold ? @drawable/result_real_face_shape : @drawable/result_fake_face_shape}"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:drawableStart="@{result.confidence == 0 ? @drawable/clock :result.confidence >= result.threshold ? @drawable/success_icon : @drawable/fail_icon}"
+
+                    android:drawablePadding="20dp"
+                    android:text='@{result.confidence == 0 ? @string/loading: result.confidence >= result.threshold ? @string/real_face : @string/fake_face}'
+                    android:textColor="@{result.confidence == 0 ?@color/loading_face_color: result.confidence >= result.threshold ? @color/real_face_color : @color/fake_face_color}"/>
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="21dp"
+                android:id="@+id/btn_flip"
+                android:src="@drawable/ic_flip_camera"/>
+
+            <ImageView
+                android:id="@+id/btn_save"
+                android:visibility="@{viewModel.isSaving() ? View.GONE : View.VISIBLE}"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_save" />
+
+            <ImageView
+                android:id="@+id/btn_dwonload"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_download"
+                android:visibility="@{viewModel.isSaving() ? View.VISIBLE : View.GONE}" />
+        </RelativeLayout>
+
+
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/settings"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:textSize="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="150dp"
+            android:visibility="@{result.confidence == 0.9999F ? View.VISIBLE : View.GONE}"
+            android:id="@+id/txt_ok"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/real_face_color"/>
+    </RelativeLayout>
+</layout>
